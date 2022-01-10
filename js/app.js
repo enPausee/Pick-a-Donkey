@@ -65,7 +65,16 @@ const eleve = [
   ],
 ];
 
+const alreadyPicked = [];
+const listAlreadyPicked = document.querySelector(".alreadyPicked");
+const btnGenerate = document.querySelector("button");
+
 function generateEleve() {
+  //check if there is still available eleve
+  if (alreadyPicked.length === eleve.length) {
+    return null;
+  }
+
   //select div to append a random eleve with his picture
   const div = document.querySelector(".eleve");
   const name = document.querySelector(".eleve-name");
@@ -73,9 +82,54 @@ function generateEleve() {
   //generate a random number between 0 and the length of the array
   const random = Math.floor(Math.random() * eleve.length);
 
-  //append the random eleve with his picture
-  div.style.backgroundImage = `url(${eleve[random][1]})`;
-  div.style.backgroundSize = "cover";
-  div.style.backgroundPosition = "center";
-  name.innerHTML = eleve[random][0];
+  //if the random eleve is already included in alreadyPicked, generate a new eleve
+  if (checkIfAlreadyPicked(eleve[random][0])) {
+    generateEleve();
+  } else {
+    //append the random eleve with his picture
+    div.style.backgroundImage = `url(${eleve[random][1]})`;
+    div.style.backgroundSize = "cover";
+    div.style.backgroundPosition = "center";
+    name.innerHTML = eleve[random][0];
+    alreadyPicked.push(eleve[random][0]);
+  }
 }
+
+function appendAlreadyPicked() {
+  //select div to append the already picked eleves
+  const div = document.querySelector(".alreadyPicked");
+
+  //append the last picked eleves
+  const btn = document.createElement("button");
+  btn.innerHTML = alreadyPicked[alreadyPicked.length - 1];
+  
+  //get the index of the last picked eleve in eleve array
+  const index = eleve.findIndex(e => e[0] === alreadyPicked[alreadyPicked.length - 1]);
+
+  btn.addEventListener("click", () => {
+    const div = document.querySelector(".eleve");
+    div.style.backgroundImage = `url(${eleve[index][1]})`;
+  });
+
+  div.appendChild(btn);
+}
+
+function checkIfAlreadyPicked(name) {
+  if (alreadyPicked.includes(name)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function updateCounter() {
+  const counter = document.querySelector(".counter");
+  counter.innerHTML = alreadyPicked.length;
+}
+
+btnGenerate.addEventListener("click", () => {
+  if (generateEleve() !== null) {
+    appendAlreadyPicked();
+    updateCounter();
+  }
+});
