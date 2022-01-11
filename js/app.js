@@ -90,9 +90,16 @@ function generateEleve() {
     div.style.backgroundImage = `url(${eleve[random][1]})`;
     div.style.backgroundSize = "cover";
     div.style.backgroundPosition = "center";
-    name.innerHTML = eleve[random][0];
+    updateName(eleve[random][0]);
     alreadyPicked.push(eleve[random][0]);
   }
+}
+
+function updateName(eleve) {
+  //get dom elements name
+  const name = document.querySelector(".eleve-name");
+
+  name.innerHTML = eleve;
 }
 
 function appendAlreadyPicked() {
@@ -116,7 +123,9 @@ function appendAlreadyPicked() {
   
   btn.addEventListener("click", () => {
     const div = document.querySelector(".eleve");
+    const name = document.querySelector(".eleve-name");
     div.style.backgroundImage = `url(${eleve[index][1]})`;
+    updateName(eleve[index][0]);
   });
 
   div2.append(span);
