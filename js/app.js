@@ -98,20 +98,31 @@ function generateEleve() {
 function appendAlreadyPicked() {
   //select div to append the already picked eleves
   const div = document.querySelector(".alreadyPicked");
+  
+  //get the index of the last picked eleve in eleve array
+  const index = eleve.findIndex(
+    (e) => e[0] === alreadyPicked[alreadyPicked.length - 1]
+  );
 
   //append the last picked eleves
   const btn = document.createElement("button");
   btn.innerHTML = alreadyPicked[alreadyPicked.length - 1];
-  
-  //get the index of the last picked eleve in eleve array
-  const index = eleve.findIndex(e => e[0] === alreadyPicked[alreadyPicked.length - 1]);
 
+  //append the last picked eleve with his place in the array
+  const span = document.createElement("span");
+  span.innerHTML = alreadyPicked.length;
+
+  const div2 = document.createElement("div");
+  
   btn.addEventListener("click", () => {
     const div = document.querySelector(".eleve");
     div.style.backgroundImage = `url(${eleve[index][1]})`;
   });
 
-  div.appendChild(btn);
+  div2.append(span);
+  div2.appendChild(btn);
+
+  div.appendChild(div2);
 }
 
 function checkIfAlreadyPicked(name) {
