@@ -71,11 +71,10 @@ const btnGenerate = document.querySelector("button");
 const btnBefore = document.querySelector(".btn-before");
 const btnNext = document.querySelector(".btn-next");
 
-let currentEleveIndex = 0;
-
 function generateEleve() {
   //check if there is still available eleve
   if (alreadyPicked.length === eleve.length) {
+    selectRandomPickedEleve();
     return null;
   }
 
@@ -96,12 +95,18 @@ function generateEleve() {
     div.style.backgroundPosition = "center";
     updateName(eleve[random][0]);
     alreadyPicked.push(eleve[random][0]);
-    currentEleveIndex = alreadyPicked.length - 1;
   }
 }
 
+function selectRandomPickedEleve() {
+  const random = Math.floor(Math.random() * alreadyPicked.length);
+  const div = document.querySelector(".eleve");
+  div.style.backgroundImage = `url(${eleve[random][1]})`;
+  div.style.backgroundSize = "cover";
+  updateName(eleve[random][0]);
+}
+
 function updateName(eleve) {
-  //get dom elements name
   const name = document.querySelector(".eleve-name");
   name.innerHTML = eleve;
 }
@@ -109,7 +114,7 @@ function updateName(eleve) {
 function appendAlreadyPicked() {
   //select div to append the already picked eleves
   const div = document.querySelector(".alreadyPicked");
-  
+
   //get the index of the last picked eleve in eleve array
   const index = eleve.findIndex(
     (e) => e[0] === alreadyPicked[alreadyPicked.length - 1]
@@ -124,7 +129,7 @@ function appendAlreadyPicked() {
   span.innerHTML = alreadyPicked.length;
 
   const div2 = document.createElement("div");
-  
+
   btn.addEventListener("click", () => {
     const div = document.querySelector(".eleve");
     div.style.backgroundImage = `url(${eleve[index][1]})`;
@@ -155,28 +160,9 @@ btnGenerate.addEventListener("click", () => {
     appendAlreadyPicked();
     updateCounter();
   }
-});
-
-//add an event listener to the before button that will update the name and picture of the eleve to the previous one in alreadyPicked array
-btnBefore.addEventListener("click", () => {
-  if (currentEleveIndex === 0) {
-    return null;
-  } else {
-    const div = document.querySelector(".eleve");
-    div.style.backgroundImage = `url(${eleve[currentEleveIndex - 1][1]})`;
-    updateName(eleve[currentEleveIndex - 1][0]);
+  //update button msg when you had the last available eleve
+  if(alreadyPicked.length === eleve.length){
+    const btn = document.querySelector(".generate");
+    btn.innerHTML = "Select random picked eleve";
   }
 });
-
-//add an event listener to the next button that will update the name and picture of the eleve to the next one in alreadyPicked array
-btnNext.addEventListener("click", () => {
-  if (currentEleveIndex === eleve.length - 1) {
-    return null;
-  } else {
-    const div = document.querySelector(".eleve");
-    div.style.backgroundImage = `url(${eleve[currentEleveIndex + 1][1]})`;
-    updateName(eleve[currentEleveIndex + 1][0]);
-  }
-});
-
-
