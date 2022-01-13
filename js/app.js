@@ -29,7 +29,7 @@ const eleve = [
   ],
   [
     "Selim GOMRI",
-    "https://neuillycdg.espace.link/documents/613c58fcbdc8b/thumbnail/600x600?access_token=OGU3NzRiNjIxZTM2N2JlYTA0OWY2MWZhZjk4YTVlZDRmYzI1NDhhYjcyNjlhNWQ4NGVlMjk4MTY5YWZkNjU0OQ",
+    "https://selimgomri.github.io/images/myProfile.jpg",
   ],
   [
     "Simon COSCINO-MOLLARD ",
@@ -91,7 +91,7 @@ function generateEleve() {
   } else {
     //append the random eleve with his picture
     div.style.backgroundImage = `url(${eleve[random][1]})`;
-    div.style.backgroundSize = "cover";
+    div.style.backgroundSize = "contain";
     div.style.backgroundPosition = "center";
     updateName(eleve[random][0]);
     alreadyPicked.push(eleve[random][0]);
@@ -102,8 +102,9 @@ function selectRandomPickedEleve() {
   const random = Math.floor(Math.random() * alreadyPicked.length);
   const div = document.querySelector(".eleve");
   div.style.backgroundImage = `url(${eleve[random][1]})`;
-  div.style.backgroundSize = "cover";
-  updateName(eleve[random][0]);
+  div.style.backgroundSize = "contain";
+  div.style.backgroundPosition = "center";
+   updateName(eleve[random][0]);
 }
 
 function updateName(eleve) {
