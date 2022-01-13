@@ -166,3 +166,11 @@ btnGenerate.addEventListener("click", () => {
     btn.innerHTML = "Select random picked eleve";
   }
 });
+
+//listen for press on spacebar
+document.addEventListener("keydown", (e) => {
+  if (e.keyCode === 32 || e.keyCode === 13) {
+    btnGenerate.click();
+  }
+}
+);
