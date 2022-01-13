@@ -24,7 +24,7 @@ const eleve = [
     "https://neuillycdg.espace.link/documents/6139187edc7a4/thumbnail/600x600?access_token=OGU3NzRiNjIxZTM2N2JlYTA0OWY2MWZhZjk4YTVlZDRmYzI1NDhhYjcyNjlhNWQ4NGVlMjk4MTY5YWZkNjU0OQ",
   ],
   [
-    "Alois DELAUNE",
+    "Aloïs DELAUNE",
     "https://neuillycdg.espace.link/documents/613d3aff451ee/thumbnail/600x600?access_token=OGU3NzRiNjIxZTM2N2JlYTA0OWY2MWZhZjk4YTVlZDRmYzI1NDhhYjcyNjlhNWQ4NGVlMjk4MTY5YWZkNjU0OQ",
   ],
   [
